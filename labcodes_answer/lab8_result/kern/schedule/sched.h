@@ -5,6 +5,9 @@
 #include <list.h>
 #include <skew_heap.h>
 
+// How many levels should be in the multilevel feedback queue scheduling algorithm?
+#define MLF_LEVEL_NUM 6
+
 struct proc_struct;
 
 typedef struct {
@@ -57,6 +60,8 @@ struct run_queue {
     int max_time_slice;
     // For LAB6 ONLY
     skew_heap_entry_t *lab6_run_pool;
+    list_entry_t mlf_run_list[MLF_LEVEL_NUM];
+    int level_max_time_slice[MLF_LEVEL_NUM];
 };
 
 void sched_init(void);
